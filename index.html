@@ -232,6 +232,34 @@
 </main>
 
 <script>
+  
+ const translations = {
+    ur: {
+      title: "لاہور کے لیے زونگ انٹرنیٹ پیکجز",
+      introHeading: "لاہور کے لیے <span class='highlight'>زونگ بنڈلز</span> دریافت کریں",
+      introSub: "لاہور کے لیے انٹرنیٹ، وائس، اور ایس ایم ایس کے بہترین بنڈل منتخب کریں۔",
+      subscribeBtn: "اب سبسکرائب کریں",
+      data: "ڈیٹا",
+      voice: "وائس",
+      sms: "ایس ایم ایس",
+      validity: "مدت",
+      dial: "ڈائل کریں"
+    },
+    en: {
+      title: "Zong Bundles — Lahore Internet Plans",
+      introHeading: "Explore <span class='highlight'>Zong Bundles</span> for Lahore",
+      introSub: "Choose the perfect internet, voice, and SMS bundle tailored for Lahore.",
+      subscribeBtn: "Subscribe Now",
+      data: "Data",
+      voice: "Voice",
+      sms: "SMS",
+      validity: "Validity",
+      dial: "Dial"
+    }
+  };
+
+  let currentLang = "en";
+
   const bundles = [
     { name: 'Haftawar Voice Offer', price: 140, data: '1GB, WA: 20GB', voice: 'All-net: 1,000', sms: '1,000', validity: '7 days', code: '*4466#' },
     { name: 'Area Play Ultra', price: 400, data: '35GB', voice: 'On-net: 5,000, Off-net: 200', sms: '5,000', validity: '7 days', code: '*4466#' },
@@ -242,7 +270,10 @@
     { name: 'MY5', price: 5000, data: '200GB', voice: 'On-net: 20,000, Off-net: 2,000', sms: '20,000', validity: '30 days', code: '*7334#' }
   ];
 
+  
+
   const main = document.querySelector('main');
+  
   bundles.forEach(bundle => {
     const card = document.createElement('article');
     card.className = 'bundle-card';
@@ -278,33 +309,7 @@ card.innerHTML = `
   });
 
   // Language toggle logic
-  const translations = {
-    ur: {
-      title: "لاہور کے لیے زونگ انٹرنیٹ پیکجز",
-      introHeading: "لاہور کے لیے <span class='highlight'>زونگ بنڈلز</span> دریافت کریں",
-      introSub: "لاہور کے لیے انٹرنیٹ، وائس، اور ایس ایم ایس کے بہترین بنڈل منتخب کریں۔",
-      subscribeBtn: "اب سبسکرائب کریں",
-      data: "ڈیٹا",
-      voice: "وائس",
-      sms: "ایس ایم ایس",
-      validity: "مدت",
-      dial: "ڈائل کریں"
-    },
-    en: {
-      title: "Zong Bundles — Lahore Internet Plans",
-      introHeading: "Explore <span class='highlight'>Zong Bundles</span> for Lahore",
-      introSub: "Choose the perfect internet, voice, and SMS bundle tailored for Lahore.",
-      subscribeBtn: "Subscribe Now",
-      data: "Data",
-      voice: "Voice",
-      sms: "SMS",
-      validity: "Validity",
-      dial: "Dial"
-    }
-  };
-
-  let currentLang = "en";
-
+ 
   document.getElementById("languageToggle").addEventListener("click", () => {
     currentLang = currentLang === "en" ? "ur" : "en";
     const t = translations[currentLang];
