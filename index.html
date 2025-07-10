@@ -246,23 +246,34 @@
   bundles.forEach(bundle => {
     const card = document.createElement('article');
     card.className = 'bundle-card';
-    card.innerHTML = `
-      <header class="bundle-header">
-        <div>
-          <h2 class="bundle-name">${bundle.name}</h2>
-          ${bundle.name === 'MY5' ? `<p class="bundle-description" style="font-size: 0.85em; color: #555;">Share resources with up to 4 numbers using the MyZong App.</p>` : ''}
-        </div>
-        <div class="bundle-price">Rs. ${bundle.price}</div>
-      </header>
-      <ul class="features">
-        <li><svg><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>${bundle.data} Data</li>
-        <li><svg><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Voice: ${bundle.voice}</li>
-        <li><svg><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>SMS: ${bundle.sms}</li>
-        <li><svg><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Validity: ${bundle.validity}</li>
-        <li><svg><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Dial <code>${bundle.code}</code> to subscribe</li>
-      </ul>
-      <a href="tel:${encodeURIComponent(bundle.code)}" class="subscribe-btn">Subscribe Now</a>
-    `;
+    <!-- Inside the JS, replace the bundle card HTML block with the new one below: -->
+
+card.innerHTML = `
+  <header class="bundle-header">
+    <div>
+      <h2 class="bundle-name">${bundle.name}</h2>
+      ${bundle.name === 'MY5' ? `<p class="bundle-description" style="font-size: 0.85em; color: #555;">Share resources with up to 4 numbers using the MyZong App.</p>` : ''}
+    </div>
+    <div class="bundle-price">Rs. ${bundle.price}</div>
+  </header>
+  <ul class="features">
+    <li><svg><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>${bundle.data} Data</li>
+    <li><svg><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Voice: ${bundle.voice}</li>
+    <li><svg><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>SMS: ${bundle.sms}</li>
+    <li><svg><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Validity: ${bundle.validity}</li>
+    <li><svg><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Dial <code>${bundle.code}</code> to subscribe</li>
+  </ul>
+  <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+    <a href="tel:${encodeURIComponent(bundle.code)}" class="subscribe-btn">${translations[currentLang].subscribeBtn}</a>
+    <a href="#" class="subscribe-btn share-btn" 
+       data-name="${bundle.name}" 
+       data-code="${bundle.code}" 
+       style="background: linear-gradient(45deg, #075e54, #25d366);">
+       Share
+    </a>
+  </div>
+`;
+
     main.appendChild(card);
   });
 
@@ -317,6 +328,23 @@
       card.querySelector(".subscribe-btn").textContent = t.subscribeBtn;
     });
   });
+
+
+  // WhatsApp Share Handler
+document.addEventListener('click', event => {
+  if (event.target.classList.contains('share-btn')) {
+    event.preventDefault();
+    const btn = event.target;
+    const bundleName = btn.dataset.name;
+    const code = btn.dataset.code;
+
+    const message = `Hey! Click this link to subscribe to the "${bundleName}" Zong bundle. It’ll open your dialer with the subscription code ready: tel:${code}`;
+    const whatsappLink = `https://wa.me/?text=${encodeURIComponent(message)}`;
+
+    window.open(whatsappLink, '_blank');
+  }
+});
+
 </script>
 
 </body>
