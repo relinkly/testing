@@ -251,6 +251,63 @@
         }
 
 
+.bundle-card {
+  position: relative; /* added */
+  z-index: 1; /* base */
+}
+
+.share-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: max-content;
+  min-width: 150px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  margin-top: 8px;
+  padding: 0.25rem 0;
+  box-sizing: border-box;
+  z-index: 9999;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  opacity: 1;
+  transform-origin: top left;
+}
+
+.share-options.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: scaleY(0);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.share-options button {
+  display: block;
+  width: 100%;
+  padding: 10px 16px;
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.share-options button:hover {
+  background-color: #eee;
+}
+
+.share-whatsapp {
+  color: #25D366;
+}
+
+.share-sms {
+  color: #0077cc;
+}
+
+
+
         main::-webkit-scrollbar {
             width: 6px;
         }
@@ -384,16 +441,24 @@ card.innerHTML = `
         ${translations[currentLang].shareBtn}
       </button>
       <div class="share-options hidden" 
-           style="position: absolute; top: 100%; left: 0; width: 100%; background: white; border: 1px solid #ccc; border-radius: 5px; margin-top: 5px; box-sizing: border-box; z-index: 10;">
-        <button class="share-whatsapp" data-name="${bundle.name}" data-code="${bundle.code}" 
-                style="width: 100%; padding: 8px 12px; background: none; border: none; text-align: left; cursor: pointer;">
-          WhatsApp
-        </button>
-        <button class="share-sms" data-name="${bundle.name}" data-code="${bundle.code}" 
-                style="width: 100%; padding: 8px 12px; background: none; border: none; text-align: left; cursor: pointer;">
-          SMS
-        </button>
-      </div>
+     style="
+       position: absolute; 
+       top: 100%; 
+       left: 0; 
+       width: 100%; 
+       background: #fff; 
+       border-radius: 8px; 
+       box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+       margin-top: 8px; 
+       box-sizing: border-box; 
+       z-index: 9999;
+       padding: 8px 0;
+     ">
+  <button class="share-whatsapp">WhatsApp</button>
+<button class="share-sms">SMS</button>
+
+</div>
+
     </div>
   </div>
 `;
@@ -449,20 +514,28 @@ card.innerHTML = `
 
 
       document.addEventListener('click', event => {
-  // Toggle share options dropdown
   if (event.target.classList.contains('share-btn')) {
     event.preventDefault();
-
     const container = event.target.closest('.share-container');
+    const card = event.target.closest('.bundle-card');
     const options = container.querySelector('.share-options');
 
-    // Hide all other share-options first
+    // Hide other dropdowns and reset z-index on other cards
     document.querySelectorAll('.share-options').forEach(opt => {
       if (opt !== options) opt.classList.add('hidden');
     });
+    document.querySelectorAll('.bundle-card').forEach(c => c.style.zIndex = 1);
 
     options.classList.toggle('hidden');
+
+    // Toggle z-index on this card
+    if (!options.classList.contains('hidden')) {
+      card.style.zIndex = 10000; // bring above all others
+    } else {
+      card.style.zIndex = 1;
+    }
   }
+
 
   // WhatsApp share
   if (event.target.classList.contains('share-whatsapp')) {
@@ -471,7 +544,7 @@ card.innerHTML = `
     const bundleName = btn.dataset.name;
     const code = btn.dataset.code;
 
-    const message = `Hey! Click this link to subscribe to the "${bundleName}" Zong bundle. It’ll open your dialer with the subscription code ready: tel:${code}`;
+    const message = `Hey! Click this link to subscribe to the "${bundleName}" Zong bundle: tel:${code}`;
     const whatsappLink = `https://wa.me/?text=${encodeURIComponent(message)}`;
 
     window.open(whatsappLink, '_blank');
