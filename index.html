@@ -358,7 +358,8 @@
                 voice: "وائس",
                 sms: "ایس ایم ایس",
                 validity: "مدت",
-                dial: "ڈائل کریں"
+                dial: "ڈائل کریں",
+                my5Description: "MyZong ایپ کے ذریعے 4 نمبروں تک وسائل شیئر کریں۔"
             },
             en: {
                 title: "Zong Bundles — Lahore Internet Plans",
@@ -370,7 +371,8 @@
                 voice: "Voice",
                 sms: "SMS",
                 validity: "Validity",
-                dial: "Dial"
+                dial: "Dial",
+                my5Description: "Share resources with up to 4 numbers using the MyZong App."
             }
         };
 
@@ -398,8 +400,8 @@
 card.innerHTML = `
   <header class="bundle-header">
     <div>
-      <h2 class="bundle-name">${bundle.name}</h2>
-      ${bundle.name === 'MY5' ? `<p class="bundle-description">Share resources with up to 4 numbers using the MyZong App.</p>` : ''}
+      <h2 class="bundle-name" style="text-align: ${currentLang === 'ur' ? 'right' : 'left'}">${bundle.name}</h2>
+      ${bundle.name === 'MY5' ? `<p class="bundle-description" style="text-align: ${currentLang === 'ur' ? 'right' : 'left'}">${translations[currentLang].my5Description}</p>` : ''}
     </div>
     <div class="bundle-price">Rs. ${bundle.price}</div>
   </header>
@@ -481,6 +483,15 @@ card.innerHTML = `
             document.getElementById("languageToggle").textContent = currentLang === "en" ? "اردو" : "English";
 
            document.querySelectorAll(".bundle-card").forEach(card => {
+  const bundleNameElem = card.querySelector(".bundle-name");
+  const descriptionElem = card.querySelector(".bundle-description");
+
+  // Update text-align for RTL/LTR
+  bundleNameElem.style.textAlign = currentLang === "ur" ? "right" : "left";
+  if (descriptionElem) {
+    descriptionElem.style.textAlign = currentLang === "ur" ? "right" : "left";
+    descriptionElem.textContent = translations[currentLang].my5Description;
+  }
     const lis = card.querySelectorAll("ul.features li");
     if (lis.length >= 5) {
         // Data: replace only label before colon, keep value after colon
