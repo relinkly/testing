@@ -1,343 +1,471 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Zong Bundles — Lahore Internet Plans</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Zong Bundles — Lahore Internet Plans</title>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-  <style>
-    :root {
-      --green-dark: #0A6339;
-      --green-medium: #137F56;
-      --green-light: #3DBA6B;
-      --fuchsia-deep: #9B0056;
-      --fuchsia-soft: #D94B8B;
-      --white: #ffffff;
-      --gray-dark: #1E1E1E;
-      --gray-medium: #4A4A4A;
-      --bg-light: #F7F9F9;
-    }
+    <style>
+        :root {
+            --green-dark: #0A6339;
+            --green-medium: #137F56;
+            --green-light: #3DBA6B;
+            --fuchsia-deep: #9B0056;
+            --fuchsia-soft: #D94B8B;
+            --white: #ffffff;
+            --gray-dark: #1E1E1E;
+            --gray-medium: #4A4A4A;
+            --bg-light: #F7F9F9;
+        }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #f0fdf4, #e0f7f1);
-      background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
-      color: var(--gray-dark);
-      margin: 0;
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f0fdf4, #e0f7f1);
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+            color: var(--gray-dark);
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
 
-    header {
-      background: var(--white);
-      padding: 1rem 2rem;
-      box-shadow: 0 2px 8px rgb(10 99 57 / 0.12);
-      text-align: center;
-      position: relative;
-      user-select: none;
-    }
+        header {
+            background: var(--white);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 8px rgb(10 99 57 / 0.12);
+            text-align: center;
+            position: relative;
+            user-select: none;
+        }
 
-    #languageToggle {
-      position: absolute;
-      right: 1.5rem;
-      top: 1rem;
-      background: var(--green-dark);
-      color: var(--white);
-      padding: 0.4rem 0.9rem;
-      border-radius: 9999px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
+        #languageToggle {
+            position: absolute;
+            right: 1.5rem;
+            top: 1rem;
+            background: var(--green-dark);
+            color: var(--white);
+            padding: 0.4rem 0.9rem;
+            border-radius: 9999px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
 
-    #languageToggle:hover {
-      background: var(--green-medium);
-    }
+        #languageToggle:hover {
+            background: var(--green-medium);
+        }
 
-    .hero {
-      padding: 0.5rem 2rem 1rem;
-      text-align: center;
-    }
+        .hero {
+            padding: 0.5rem 2rem 1rem;
+            text-align: center;
+        }
 
-    .hero h1 {
-      font-weight: 700;
-      font-size: 2.2rem;
-      color: var(--green-dark);
-      margin: 0 0 0.3rem;
-      letter-spacing: -0.015em;
-    }
+        .hero h1 {
+            font-weight: 700;
+            font-size: 2.2rem;
+            color: var(--green-dark);
+            margin: 0 0 0.3rem;
+            letter-spacing: -0.015em;
+        }
 
-    .hero h1 .highlight {
-      color: var(--fuchsia-deep);
-    }
+        .hero h1 .highlight {
+            color: var(--fuchsia-deep);
+        }
 
-    .hero p {
-      font-weight: 500;
-      font-size: 1rem;
-      color: var(--gray-medium);
-      margin: 0 0 0.75rem;
-    }
+        .hero p {
+            font-weight: 500;
+            font-size: 1rem;
+            color: var(--gray-medium);
+            margin: 0 0 0.75rem;
+        }
 
-    main {
-      flex: 1 1 auto;
-      padding: 0.75rem 1.5rem 1.5rem;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem 1.5rem;
-      overflow-y: auto;
-      user-select: none;
-    }
+        main {
+            flex: 1 1 auto;
+            padding: 0.75rem 1.5rem 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem 1.5rem;
+            overflow-y: auto;
+            user-select: none;
+        }
 
-    .bundle-card {
-      background: var(--white);
-      border-radius: 1rem;
-      box-shadow: 0 6px 18px rgb(10 99 57 / 0.07);
-      padding: 1.25rem 1.5rem 1.75rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      border: 1px solid transparent;
-      transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
-      cursor: pointer;
-    }
+        .bundle-card {
+            background: var(--white);
+            border-radius: 1rem;
+            box-shadow: 0 6px 18px rgb(10 99 57 / 0.07);
+            padding: 1.25rem 1.5rem 1.75rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid transparent;
+            transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+            cursor: pointer;
+        }
 
-    .bundle-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--green-dark);
-      box-shadow: 0 12px 30px rgb(10 99 57 / 0.22);
-    }
+        .bundle-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--green-dark);
+            box-shadow: 0 12px 30px rgb(10 99 57 / 0.22);
+        }
 
-    .bundle-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-    }
+        .bundle-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            /* top-aligns name and price */
+            text-align: left;
+        }
 
-    .bundle-name {
-      font-weight: 700;
-      font-size: 1.25rem;
-      color: var(--green-dark);
-    }
+        .bundle-info {
+            flex: 1;
+            text-align: left;
+        }
 
-    .bundle-price {
-      font-weight: 700;
-      font-size: 1.1rem;
-      background: linear-gradient(45deg, var(--fuchsia-deep), var(--fuchsia-soft));
-      color: var(--white);
-      padding: 0.3rem 1rem;
-      border-radius: 9999px;
-      box-shadow: 0 0 16px rgb(155 0 86 / 0.65);
-      white-space: nowrap;
-    }
+        .bundle-name {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--green-dark);
+            margin-bottom: 0.2rem;
+            text-align: left;
+            /* ensures text isn't centered */
+        }
 
-    ul.features {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 1.5rem 0;
-      font-weight: 600;
-      font-size: 0.9rem;
-      color: var(--gray-dark);
-    }
+        .bundle-description {
+            font-size: 0.85em;
+            color: #555;
+            text-align: left;
+        }
 
-    ul.features li {
-      display: flex;
-      align-items: center;
-      margin-bottom: 0.85rem;
-    }
+        .bundle-price {
+            font-weight: 700;
+            font-size: 1.1rem;
+            background: linear-gradient(45deg, var(--fuchsia-deep), var(--fuchsia-soft));
+            color: var(--white);
+            padding: 0.3rem 1rem;
+            border-radius: 9999px;
+            box-shadow: 0 0 16px rgb(155 0 86 / 0.65);
+            white-space: nowrap;
+        }
 
-    ul.features li svg {
-      width: 18px;
-      height: 18px;
-      stroke: var(--green-dark);
-      margin-right: 0.7rem;
-      stroke-width: 2;
-      flex-shrink: 0;
-    }
+        ul.features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1.5rem 0;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--gray-dark);
+        }
 
-    code {
-      background: #e3f1e1;
-      padding: 3px 7px;
-      border-radius: 6px;
-      font-family: monospace;
-      font-weight: 700;
-      font-size: 0.85rem;
-      color: var(--green-dark);
-      user-select: text;
-    }
+        ul.features li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.85rem;
+        }
 
-    .subscribe-btn {
-      background: linear-gradient(45deg, var(--green-dark), var(--green-medium));
-      border-radius: 9999px;
-      padding: 0.75rem 2rem;
-      font-weight: 700;
-      font-size: 1rem;
-      color: var(--white);
-      text-align: center;
-      box-shadow: 0 6px 18px rgb(10 99 57 / 0.55);
-      user-select: none;
-      transition: box-shadow 0.3s ease, transform 0.3s ease;
-      letter-spacing: 0.03em;
-      cursor: pointer;
-    }
+        ul.features li svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--green-dark);
+            margin-right: 0.7rem;
+            stroke-width: 2;
+            flex-shrink: 0;
+        }
 
-    .subscribe-btn:hover {
-      box-shadow: 0 10px 28px rgb(10 99 57 / 0.8);
-      transform: scale(1.04);
-    }
+        code {
+            background: #e3f1e1;
+            padding: 3px 7px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--green-dark);
+            user-select: text;
+        }
 
-    main::-webkit-scrollbar {
-      width: 6px;
-    }
 
-    main::-webkit-scrollbar-track {
-      background: transparent;
-    }
 
-    main::-webkit-scrollbar-thumb {
-      background-color: var(--green-medium);
-      border-radius: 3px;
-    }
 
-    @media (max-width: 720px) {
-      main {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+        .card-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .card-buttons .subscribe-btn,
+        .card-buttons .share-btn {
+            flex: 1 1 48%;
+            text-align: center;
+            border-radius: 9999px;
+            padding: 0.75rem 1rem;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 0.03em;
+            color: var(--white);
+            user-select: none;
+            cursor: pointer;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        .card-buttons .subscribe-btn {
+            background: linear-gradient(45deg, var(--green-dark), var(--green-medium));
+            box-shadow: 0 6px 18px rgb(10 99 57 / 0.55);
+        }
+
+        .card-buttons .share-btn {
+            background: linear-gradient(45deg, #075e54, #25d366);
+            box-shadow: 0 6px 18px rgba(7, 94, 84, 0.55);
+        }
+
+        .card-buttons .subscribe-btn:hover,
+        .card-buttons .share-btn:hover {
+            transform: scale(1.04);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
+        }
+
+        
+
+        @media (max-width: 640px) {
+
+            .card-buttons .subscribe-btn,
+            .card-buttons .share-btn {
+                flex: 1 1 100%;
+            }
+        }
+
+        .tick-icon {
+            width: 18px;
+            height: 18px;
+            stroke: var(--green-dark);
+            flex-shrink: 0;
+            margin-inline-end: 0.7rem;
+        }
+
+
+        main::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        main::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        main::-webkit-scrollbar-thumb {
+            background-color: var(--green-medium);
+            border-radius: 3px;
+        }
+
+        @media (max-width: 720px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-<header>
-  <h1 class="sr-only">Zong Bundles for Lahore Internet Plans</h1>
-  <button id="languageToggle">اردو</button>
-</header>
+    <header>
+        <h1 class="sr-only">Zong Bundles for Lahore Internet Plans</h1>
+        <button id="languageToggle">اردو</button>
+    </header>
 
-<section class="hero" aria-label="Page introduction">
-  <h1>Explore <span class="highlight">Zong Bundles</span> for Lahore</h1>
-  <p>Choose the perfect internet, voice, and SMS bundle tailored for Lahore.</p>
-</section>
+    <section class="hero" aria-label="Page introduction">
+        <h1>Explore <span class="highlight">Zong Bundles</span> for Lahore</h1>
+        <p>Choose the perfect internet, voice, and SMS bundle tailored for Lahore.</p>
+    </section>
 
-<main role="main" aria-label="Available Zong bundles" tabindex="0">
-  <!-- Bundles will be injected here -->
-</main>
+    <main role="main" aria-label="Available Zong bundles" tabindex="0">
+        <!-- Bundles will be injected here -->
+    </main>
 
-<script>
-  
- const translations = {
-    ur: {
-      title: "لاہور کے لیے زونگ انٹرنیٹ پیکجز",
-      introHeading: "لاہور کے لیے <span class='highlight'>زونگ بنڈلز</span> دریافت کریں",
-      introSub: "لاہور کے لیے انٹرنیٹ، وائس، اور ایس ایم ایس کے بہترین بنڈل منتخب کریں۔",
-      subscribeBtn: "اب سبسکرائب کریں",
-      data: "ڈیٹا",
-      voice: "وائس",
-      sms: "ایس ایم ایس",
-      validity: "مدت",
-      dial: "ڈائل کریں"
-    },
-    en: {
-      title: "Zong Bundles — Lahore Internet Plans",
-      introHeading: "Explore <span class='highlight'>Zong Bundles</span> for Lahore",
-      introSub: "Choose the perfect internet, voice, and SMS bundle tailored for Lahore.",
-      subscribeBtn: "Subscribe Now",
-      data: "Data",
-      voice: "Voice",
-      sms: "SMS",
-      validity: "Validity",
-      dial: "Dial"
-    }
-  };
+    <script>
 
-  let currentLang = "en";
+        const translations = {
+            ur: {
+                title: "لاہور کے لیے زونگ انٹرنیٹ پیکجز",
+                introHeading: "لاہور کے لیے <span class='highlight'>زونگ بنڈلز</span> دریافت کریں",
+                introSub: "لاہور کے لیے انٹرنیٹ، وائس، اور ایس ایم ایس کے بہترین بنڈل منتخب کریں۔",
+                subscribeBtn: "سبسکرائب کریں",
+                shareBtn: "شیئر کریں",
+                data: "ڈیٹا",
+                voice: "وائس",
+                sms: "ایس ایم ایس",
+                validity: "مدت",
+                dial: "ڈائل کریں"
+            },
+            en: {
+                title: "Zong Bundles — Lahore Internet Plans",
+                introHeading: "Explore <span class='highlight'>Zong Bundles</span> for Lahore",
+                introSub: "Choose the perfect internet, voice, and SMS bundle tailored for Lahore.",
+                subscribeBtn: "Subscribe",
+                shareBtn: "Share",
+                data: "Data",
+                voice: "Voice",
+                sms: "SMS",
+                validity: "Validity",
+                dial: "Dial"
+            }
+        };
 
-  const bundles = [
-    { name: 'Haftawar Voice Offer', price: 140, data: '1GB, WA: 20GB', voice: 'All-net: 1,000', sms: '1,000', validity: '7 days', code: '*4466#' },
-    { name: 'Area Play Ultra', price: 400, data: '35GB', voice: 'On-net: 5,000, Off-net: 200', sms: '5,000', validity: '7 days', code: '*4466#' },
-    { name: 'Weekly Premium', price: 500, data: '30GB Flat', voice: 'On-net: 5,000, Off-net: 180', sms: '5,000', validity: '7 days', code: '*2250#' },
-    { name: 'Weekly Digital Max', price: 600, data: '100GB', voice: 'On-net: 10,000, Off-net: 1000', sms: '10,000', validity: '7 days', code: '*1601#' },
-    { name: 'Maheena Bhar Offer', price: 580, data: '10GB, WA: 20GB', voice: 'All-net: 2,000', sms: '2,000', validity: '30 days', code: '*4466#' },
-    { name: 'Monthly Pro Max Basic', price: 2100, data: '200GB', voice: 'On-net: 20,000, Off-net: 2,000', sms: '20,000', validity: '30 days', code: '*7340#' },
-    { name: 'MY5', price: 5000, data: '200GB', voice: 'On-net: 20,000, Off-net: 2,000', sms: '20,000', validity: '30 days', code: '*7334#' }
-  ];
+        let currentLang = "en";
 
-  
+        const bundles = [
+            { name: 'Haftawar Voice Offer', price: 140, data: '1GB, WA: 20GB', voice: 'All-net: 1,000', sms: '1,000', validity: '7 days', code: '*4466#' },
+            { name: 'Area Play Ultra', price: 400, data: '35GB', voice: 'On-net: 5,000, Off-net: 200', sms: '5,000', validity: '7 days', code: '*4466#' },
+            { name: 'Weekly Premium', price: 500, data: '30GB Flat', voice: 'On-net: 5,000, Off-net: 180', sms: '5,000', validity: '7 days', code: '*2250#' },
+            { name: 'Weekly Digital Max', price: 600, data: '100GB', voice: 'On-net: 10,000, Off-net: 1000', sms: '10,000', validity: '7 days', code: '*1601#' },
+            { name: 'Maheena Bhar Offer', price: 580, data: '10GB, WA: 20GB', voice: 'All-net: 2,000', sms: '2,000', validity: '30 days', code: '*4466#' },
+            { name: 'Monthly Pro Max Basic', price: 2100, data: '200GB', voice: 'On-net: 20,000, Off-net: 2,000', sms: '20,000', validity: '30 days', code: '*7340#' },
+            { name: 'MY5', price: 5000, data: '200GB', voice: 'On-net: 20,000, Off-net: 2,000', sms: '20,000', validity: '30 days', code: '*7334#' }
+        ];
 
-  const main = document.querySelector('main');
-  
-  bundles.forEach(bundle => {
-    const card = document.createElement('article');
-    card.className = 'bundle-card';
-    <!-- Inside the JS, replace the bundle card HTML block with the new one below: -->
+
+
+        const main = document.querySelector('main');
+
+        bundles.forEach(bundle => {
+            const card = document.createElement('article');
+            card.className = 'bundle-card';
+            <!-- Inside the JS, replace the bundle card HTML block with the new one below: -->
 
 card.innerHTML = `
   <header class="bundle-header">
     <div>
       <h2 class="bundle-name">${bundle.name}</h2>
-      ${bundle.name === 'MY5' ? `<p class="bundle-description" style="font-size: 0.85em; color: #555;">Share resources with up to 4 numbers using the MyZong App.</p>` : ''}
+      ${bundle.name === 'MY5' ? `<p class="bundle-description">Share resources with up to 4 numbers using the MyZong App.</p>` : ''}
     </div>
     <div class="bundle-price">Rs. ${bundle.price}</div>
   </header>
   <ul class="features">
-    <li><svg><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>${bundle.data} Data</li>
-    <li><svg><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Voice: ${bundle.voice}</li>
-    <li><svg><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>SMS: ${bundle.sms}</li>
-    <li><svg><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Validity: ${bundle.validity}</li>
-    <li><svg><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Dial <code>${bundle.code}</code> to subscribe</li>
+    <li><svg class="tick-icon" xmlns="http://www.w3.org/2000/svg" fill="none" 
+     viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+    </svg>
+    ${translations[currentLang].data}: ${bundle.data}</li>
+    <li><svg class="tick-icon" xmlns="http://www.w3.org/2000/svg" fill="none" 
+     viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+    </svg>
+    ${translations[currentLang].voice}: ${bundle.voice}</li>
+    <li><svg class="tick-icon" xmlns="http://www.w3.org/2000/svg" fill="none" 
+     viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+    </svg>
+    ${translations[currentLang].sms}: ${bundle.sms}</li>
+    <li><svg class="tick-icon" xmlns="http://www.w3.org/2000/svg" fill="none" 
+     viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+    </svg>
+    ${translations[currentLang].validity}: ${bundle.validity}</li>
+    <li><svg class="tick-icon" xmlns="http://www.w3.org/2000/svg" fill="none" 
+     viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+    </svg>
+    ${translations[currentLang].dial} <code>${bundle.code}</code> to subscribe</li>
   </ul>
-  <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-    <a href="tel:${encodeURIComponent(bundle.code)}" class="subscribe-btn">${translations[currentLang].subscribeBtn}</a>
-    <a href="#" class="subscribe-btn share-btn" 
-       data-name="${bundle.name}" 
-       data-code="${bundle.code}" 
-       style="background: linear-gradient(45deg, #075e54, #25d366);">
-       Share
+  <div class="card-buttons" style="display: flex; gap: 10px;">
+    <a href="tel:${encodeURIComponent(bundle.code)}" class="subscribe-btn" 
+       style="flex: 1; text-align: center; padding: 10px 0; background-color: #0077cc; color: white; border-radius: 5px; text-decoration: none;">
+      ${translations[currentLang].subscribeBtn}
     </a>
+    <div class="share-container" style="flex: 1; position: relative;">
+      <button class="share-btn" data-name="${bundle.name}" data-code="${bundle.code}" 
+              style="width: 100%; padding: 10px 0; background-color: #0077cc; color: white; border: none; border-radius: 5px; cursor: pointer;">
+        ${translations[currentLang].shareBtn}
+      </button>
+      <div class="share-options hidden" 
+           style="position: absolute; top: 100%; left: 0; width: 100%; background: white; border: 1px solid #ccc; border-radius: 5px; margin-top: 5px; box-sizing: border-box; display: none; z-index: 10;">
+        <button class="share-whatsapp" data-name="${bundle.name}" data-code="${bundle.code}" 
+                style="width: 100%; padding: 8px 12px; background: none; border: none; text-align: left; cursor: pointer;">
+          WhatsApp
+        </button>
+        <button class="share-sms" data-name="${bundle.name}" data-code="${bundle.code}" 
+                style="width: 100%; padding: 8px 12px; background: none; border: none; text-align: left; cursor: pointer;">
+          SMS
+        </button>
+      </div>
+    </div>
   </div>
 `;
 
-    main.appendChild(card);
-  });
-
-  // Language toggle logic
- 
-  document.getElementById("languageToggle").addEventListener("click", () => {
-    currentLang = currentLang === "en" ? "ur" : "en";
-    const t = translations[currentLang];
-
-    document.title = t.title;
-    document.body.dir = currentLang === "ur" ? "rtl" : "ltr";
-    document.querySelector(".hero h1").innerHTML = t.introHeading;
-    document.querySelector(".hero p").textContent = t.introSub;
-    document.getElementById("languageToggle").textContent = currentLang === "en" ? "اردو" : "English";
-
-    document.querySelectorAll(".bundle-card").forEach(card => {
-      const lis = card.querySelectorAll("ul.features li");
-      if (lis.length >= 5) {
-        lis[0].innerHTML = lis[0].innerHTML.split("</svg>")[0] + "</svg>" + `${card.querySelector('.features li').textContent.split(' ')[0]} ${t.data}`;
-        lis[1].innerHTML = lis[1].innerHTML.split("</svg>")[0] + "</svg>" + `${t.voice}: ` + lis[1].textContent.split(": ")[1];
-        lis[2].innerHTML = lis[2].innerHTML.split("</svg>")[0] + "</svg>" + `${t.sms}: ` + lis[2].textContent.split(": ")[1];
-        lis[3].innerHTML = lis[3].innerHTML.split("</svg>")[0] + "</svg>" + `${t.validity}: ` + lis[3].textContent.split(": ")[1];
-        lis[4].innerHTML = lis[4].innerHTML.split("</svg>")[0] + "</svg>" + `${t.dial} <code>${lis[4].querySelector("code").textContent}</code>`;
-      }
-
-      card.querySelector(".subscribe-btn").textContent = t.subscribeBtn;
-    });
-  });
 
 
-  // WhatsApp Share Handler
-document.addEventListener('click', event => {
+            main.appendChild(card);
+        });
+
+        // Language toggle logic
+
+        document.getElementById("languageToggle").addEventListener("click", () => {
+            currentLang = currentLang === "en" ? "ur" : "en";
+            const t = translations[currentLang];
+
+            document.title = t.title;
+            document.body.dir = currentLang === "ur" ? "rtl" : "ltr";
+            document.querySelector(".hero h1").innerHTML = t.introHeading;
+            document.querySelector(".hero p").textContent = t.introSub;
+            document.getElementById("languageToggle").textContent = currentLang === "en" ? "اردو" : "English";
+
+           document.querySelectorAll(".bundle-card").forEach(card => {
+    const lis = card.querySelectorAll("ul.features li");
+    if (lis.length >= 5) {
+        // Data: replace only label before colon, keep value after colon
+        const dataValue = lis[0].textContent.split(": ").slice(1).join(": ") || "";
+        lis[0].innerHTML = lis[0].innerHTML.split("</svg>")[0] + "</svg>" + `${t.data}: ${dataValue}`;
+
+        const voiceValue = lis[1].textContent.split(": ")[1] || "";
+        lis[1].innerHTML = lis[1].innerHTML.split("</svg>")[0] + "</svg>" + `${t.voice}: ${voiceValue}`;
+
+        const smsValue = lis[2].textContent.split(": ")[1] || "";
+        lis[2].innerHTML = lis[2].innerHTML.split("</svg>")[0] + "</svg>" + `${t.sms}: ${smsValue}`;
+
+        const validityValue = lis[3].textContent.split(": ")[1] || "";
+        lis[3].innerHTML = lis[3].innerHTML.split("</svg>")[0] + "</svg>" + `${t.validity}: ${validityValue}`;
+
+        const dialCode = lis[4].querySelector("code").textContent;
+        lis[4].innerHTML = lis[4].innerHTML.split("</svg>")[0] + "</svg>" + `${t.dial} <code>${dialCode}</code>`;
+    }
+
+    // Update buttons text
+    const subscribeButton = card.querySelector(".subscribe-btn");
+    const shareButton = card.querySelector(".share-btn");
+
+    if (subscribeButton) subscribeButton.textContent = t.subscribeBtn;
+    if (shareButton) shareButton.textContent = t.shareBtn;
+});
+
+
+
+        });
+
+
+      document.addEventListener('click', event => {
+  // Toggle share options dropdown
   if (event.target.classList.contains('share-btn')) {
+    event.preventDefault();
+
+    const container = event.target.closest('.share-container');
+    const options = container.querySelector('.share-options');
+
+    // Hide all other share-options first
+    document.querySelectorAll('.share-options').forEach(opt => {
+      if (opt !== options) opt.classList.add('hidden');
+    });
+
+    options.classList.toggle('hidden');
+  }
+
+  // WhatsApp share
+  if (event.target.classList.contains('share-whatsapp')) {
     event.preventDefault();
     const btn = event.target;
     const bundleName = btn.dataset.name;
@@ -347,10 +475,37 @@ document.addEventListener('click', event => {
     const whatsappLink = `https://wa.me/?text=${encodeURIComponent(message)}`;
 
     window.open(whatsappLink, '_blank');
+
+    // Hide options after click
+    btn.closest('.share-options').classList.add('hidden');
+  }
+
+  // SMS share
+  if (event.target.classList.contains('share-sms')) {
+    event.preventDefault();
+    const btn = event.target;
+    const bundleName = btn.dataset.name;
+    const code = btn.dataset.code;
+
+    // Compose SMS body message
+    const smsBody = `Subscribe to the "${bundleName}" Zong bundle using this code: ${code}`;
+
+    // Open SMS app with prefilled message (this works on mobile devices)
+    window.location.href = `sms:?&body=${encodeURIComponent(smsBody)}`;
+
+    // Hide options after click
+    btn.closest('.share-options').classList.add('hidden');
+  }
+
+  // Click outside to close share options
+  if (!event.target.closest('.share-container')) {
+    document.querySelectorAll('.share-options').forEach(opt => opt.classList.add('hidden'));
   }
 });
 
-</script>
+
+    </script>
 
 </body>
+
 </html>
