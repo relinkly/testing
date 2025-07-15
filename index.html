@@ -589,6 +589,96 @@ card.innerHTML = `
 
 
     </script>
+<button id="openComplaintModal"
+    class="fixed bottom-6 right-6 bg-fuchsia-700 text-white font-semibold py-2 px-4 rounded-full shadow-lg hover:bg-fuchsia-800 z-50">
+    File a Complaint
+</button>
+<div id="complaintModal" class="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50 hidden">
+  <div class="bg-white rounded-lg shadow-xl w-full max-w-lg p-6 relative">
+    <h2 class="text-xl font-bold mb-4 text-green-700">Complaint Form</h2>
+
+    <form id="complaintForm" class="space-y-4">
+      <div>
+        <label class="block font-medium">Full Name</label>
+        <input type="text" name="name" required
+               class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500">
+      </div>
+      <div>
+        <label class="block font-medium">Phone Number</label>
+        <input type="tel" name="phone" required pattern="[0-9]{10,15}"
+               class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500">
+      </div>
+      <div>
+        <label class="block font-medium">City</label>
+        <input type="text" name="city" required
+               class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500">
+      </div>
+      <div>
+        <label class="block font-medium">Area</label>
+        <input type="text" name="area" required
+               class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500">
+      </div>
+      <div>
+        <label class="block font-medium">Complaint</label>
+        <textarea name="complaint" rows="4" required
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"></textarea>
+      </div>
+
+      <div class="flex justify-end gap-2 mt-4">
+        <button type="button" id="closeComplaintModal"
+                class="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded">
+          Cancel
+        </button>
+        <button type="submit"
+                class="bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded font-semibold">
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+    <script>
+  const openBtn = document.getElementById("openComplaintModal");
+  const modal = document.getElementById("complaintModal");
+  const closeBtn = document.getElementById("closeComplaintModal");
+  const form = document.getElementById("complaintForm");
+
+  openBtn.addEventListener("click", () => {
+    modal.classList.remove("hidden");
+  });
+
+  closeBtn.addEventListener("click", () => {
+    modal.classList.add("hidden");
+  });
+
+  // Close modal on outside click
+  window.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.classList.add("hidden");
+    }
+  });
+
+  // Handle form submit
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    // Basic validation check (HTML5 also helps)
+    const formData = new FormData(form);
+    const values = Object.fromEntries(formData.entries());
+
+    if (Object.values(values).some(v => !v.trim())) {
+      alert("Please fill in all fields.");
+      return;
+    }
+
+    // Success alert (can be replaced with backend call)
+    alert("Thank you! Your complaint has been submitted.");
+    form.reset();
+    modal.classList.add("hidden");
+  });
+</script>
 
 </body>
 
